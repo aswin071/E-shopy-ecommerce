@@ -1,0 +1,58 @@
+{% extends 'myadmin/base.html' %}
+
+{% block content %}
+
+
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="container mt-3" style="min-height: 33rem;">
+          <h2 class="text-center text-white">Add Coupon</h2>
+          <form action="{% url 'addcoupons' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <label>Code</label><br>
+              {{ form.code }}
+            </div>
+            <div class="form-group">
+              <label>Discount</label><br>
+              {{ form.discount }}
+            </div>
+            <div class="form-group">
+              <label>Min Value</label><br>
+              {{ form.min_value }}
+            </div>
+            <div class="form-group">
+              <label>Expiry Date</label><br>
+              {{ form.valid_at }}
+            </div>
+            <div class="form-group">
+              <label>Is Active</label><br>
+              {{ form.active }}
+            </div>
+            <div class="form-group">
+              <input type="submit" name="submit" id="submit" class="btn btn-warning" value="Add Coupon"/>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Instructions</h5>
+            <ul>
+              <li>1) Enter the coupon code.</li>
+              <li>2) Set the maximum coupon expiry date to 30 days.</li>
+              <li>3) Maximum discount available is 30%.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

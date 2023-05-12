@@ -1,0 +1,106 @@
+{% extends 'mainapp/mainbase.html' %}
+
+{% load static %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+{% block content %}
+<div class="text-center mx-auto mt-2 w-50"> {% include 'includes/alerts.html' %}</div> 
+
+  <!--================Home Banner Area =================-->
+  <section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div
+          class="banner_content d-md-flex justify-content-between align-items-center"
+        >
+          <div class="mb-3 mb-md-0">
+            <h2>Profile</h2>
+            <p>Very us move be blessed multiply night</p>
+          </div>
+          <div class="page_link">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'profile' %}">Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Home Banner Area =================-->
+<div class="container p-0">
+  
+    <div class="row">
+        <div class="col-md-5 col-xl-4 mt-5">
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Profile Settings</h5>
+                </div>
+
+                <div class="list-group list-group-flush" role="tablist">
+                    <a class="list-group-item list-group-item-action active"  href="{% url 'profile' %}" role="tab">
+                      Account
+                    </a>
+                    <a class="list-group-item list-group-item-action"  href="{% url 'changepassword' %}" role="tab">
+                      Password
+                    </a>
+                    <a class="list-group-item list-group-item-action"  href="{% url 'myOrders' %}" role="tab">
+                     My Orders
+                    </a>
+                    <a class="list-group-item list-group-item-action"  href="{% url 'useraddress' %}" role="tab">
+                 My Address
+                    </a>
+                    <a class="list-group-item list-group-item-action"  href="{% url 'editprofile' %}"role="tab" >
+                    Edit Profile
+                    </a>
+                    
+                </div>
+            </div>
+            <a class="btn btn-light btn-block mt-3  " href="{% url 'userlogout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
+        </div>
+    
+<div class="col-md-7 col-xl-8 mt-5">
+    <article class="card">
+        <header class="card-header">
+            {% if user.is_authenticated %}
+          <strong class="d-inline-block mr-3">Logged in as :</strong>
+          <span>{{user.first_name}} {{user.last_name}}</span>
+        </header>
+        <div class="text-center mx-auto mt-2" style="min-width: 22rem;"></div>
+        <div class="card-body">
+          <div class="row"> 
+          <div class="col-md-6">
+            <div class="card" style="text-align: center;">
+              <div class="card-body">
+                <h5 class="card-title mb-3"><b>Total Orders</b></h5>
+                <h4 class="mb-4">{{orders_count}}</h4>
+                <a class="" href="{% url 'myOrders' %}">View Orders</a>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col-md-6">
+            <div class="card" style="text-align: center;">
+              <div class="card-body">
+                <img alt="Andrew Jones" src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle img-responsive mt-2" width="128" height="128">
+
+              <p class="mb-0">{{user.email}}</p>
+              <p class="mt-0">{{user.first_name}} {{user.last_name}}</p>
+              {% endif %}
+            </div>
+            </div>
+          </div>
+          </div> <!-- row.// -->
+        </div> <!-- card-body .// -->
+    
+        
+         <!-- table-responsive .end// -->
+        </article>
+    </div>
+</div>
+</div>
+</div>
+
+
+    
+
+
+{% endblock content %}

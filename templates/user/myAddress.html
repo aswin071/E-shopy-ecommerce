@@ -1,0 +1,160 @@
+{% extends 'mainapp/mainbase.html' %}
+
+{% load static %}
+
+{% block content %}
+ <!--================Home Banner Area =================-->
+ <section class="banner_area">
+  <div class="banner_inner d-flex align-items-center">
+    <div class="container">
+      <div
+        class="banner_content d-md-flex justify-content-between align-items-center"
+      >
+        <div class="mb-3 mb-md-0">
+          <h2>Profile</h2>
+          <p>Very us move be blessed multiply night</p>
+        </div>
+        <div class="page_link">
+          <a href="{% url 'home' %}">Home</a>
+          <a href="{% url 'profile' %}">Profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Home Banner Area =================-->
+<div class="container p-0">
+  
+    <div class="row">
+        <div class="col-md-5 col-xl-4 mt-5">
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Profile Settings</h5>
+                </div>
+
+                <div class="list-group list-group-flush" role="tablist">
+                    <a class="list-group-item list-group-item-action active"  href="{% url 'profile' %}" role="tab">
+                      Account
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="{% url 'changepassword' %}" role="tab">
+                      Password
+                    </a>
+                    <a class="list-group-item list-group-item-action"  href="{% url 'myOrders' %}" role="tab">
+                     My Orders
+                    </a>
+                    <a class="list-group-item list-group-item-action"  href="{% url 'useraddress' %}" role="tab">
+                 My Address
+                    </a>
+                    <a class="list-group-item list-group-item-action"  href="{% url 'editprofile' %}"role="tab" >
+                    Edit Profile
+                    </a>
+                    
+                </div>
+              </div>
+                <a class="btn btn-light btn-block mt-3  " href="{% url 'userlogout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
+            
+        </div>
+        <div class="col-md-7 col-xl-8 mt-5">
+
+            <div class="container">
+              <div class="row">
+              
+              <div class="col-lg-12">
+                <div class="card">
+                
+                  <div class="text-center mx-auto mt-2 w-50"> {% include 'includes/alerts.html' %}</div> 
+            <header class="card-header">
+              <strong class="d-inline-block mr-3">Your Addresses</strong>
+              
+            
+            </header>
+            {% if address %}
+                <div class="card-body">
+                  <div class="row"> 
+                  <div class="col-md-12">
+          
+          
+                    {% for item in address %}
+          
+                    <h5 class="card-header bg-primary text-white">Address {{forloop.counter}}</h5>
+          
+                    <div class="card-body form-check row">
+                      <div class="row">
+                        <div class="col-md-12">                      
+                          <div class="d-block">
+                              <p class="card-text mb-0"><b>{{item.full_name}}</b> , {{item.address_line1}}, {{item.address_line2}}, {{item.city}}, {{item.district}}, {{item.state}}, {{item.pincode}}</p>
+                              <p class="cart-text mb-0">{{item.email}}</p>
+                              <p class="cart-text mb-0">{{item.phone}}</p>
+                          </div>
+                          <div class="mt-3">
+                            <a href="{% url 'editaddress' item.id %}"><button class="btn btn-warning btn-sm mr-2">Edit</button></a>
+                            <a href="{% url 'deleteaddress' item.id %}"><button onclick="return confirm('Are you sure you want to delete?');" class="btn btn-danger btn-sm mr-2">Delete</button>
+                          </div>
+                        </div>  
+                      </div>        
+                    </div>          
+                    <!-- Modal -->
+                 
+                    {% comment %} <div class="modal fade" id="modal{{item.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete Address?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            Are you sure to delete <b>Address {{forloop.counter}}</b>?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                            <a href="{% url 'deleteaddress' item.id %}"><button type="button" class="btn btn-primary">YES</button></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div> {% endcomment %}
+                        <hr>
+                    {%endfor%}
+                    <div class="card-body form-check row">
+                        <div class="col-12  py-2">
+                            <div class="row d-flex align-content-center">
+                                <div class="col-12 d-block ml-2 d-flex">
+                                    <p class="card-text mt-1 h5"><b class="text-center">Add New Address</b></p>
+                                    <a href="{% url 'addaddress' %}" class="col-3 btn ml-auto mr-5 text-white"  style="background-color: #7fad39;">Add</a>
+                                </div>
+                            </div>
+                            
+                        </div>              
+                    </div>
+                    {%else%}
+                    <div class="card-body form-check row d-flex align-items-center" style="height: 328px;">
+                        <div class="col-12  py-5">
+                            <div class="row d-flex align-content-center">
+                                <div class="col-12 d-block ml-2">
+                                    <p class="card-text mb-0 h2 text-center"><b>No addresses found in your account!</b></p>
+                                </div>
+                                <a href="{% url 'addaddress' %}" class="col-3 btn text-white mx-auto mt-3"  style="background-color: #007bff;">Add Address</a>
+                            </div>
+                            
+                        </div>              
+                    </div>
+                    {%endif%}
+                  
+                  </div>
+                  </div> <!-- row.// -->
+                </div> <!-- card-body .// -->
+          </div> <!-- order-group.// --> 
+              </main>
+            </div> <!-- row.// -->
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+            
+            
+
+
+{% endblock content %}

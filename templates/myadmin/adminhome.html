@@ -1,0 +1,395 @@
+{% extends 'myadmin/base.html' %}
+{% load static%}
+
+{% block title%}
+Admin Panel
+{%endblock%}
+
+{% block navbar%}
+{% include 'includes/alerts.html' %}
+
+
+
+{%endblock%}
+
+{% block content%}
+      <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+          <div class="container-fluid">
+              <div class="row page-titles mx-0">
+                  <div class="col-sm-6 p-md-0">
+                      <div class="welcome-text">
+                          <h4>Hi, welcome back!</h4>
+                        
+                      </div>
+                  </div>
+                  <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                      <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="javascript:void(0)">Layout</a></li>
+                          <li class="breadcrumb-item active"><a href="javascript:void(0)">Blank</a></li>
+                      </ol>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-lg-3 col-sm-6">
+                      <div class="card">
+                          <div class="stat-widget-one card-body">
+                              <div class="stat-icon d-inline-block">
+                                  <i class="ti-money text-success border-success"></i>
+                              </div>
+                              <div class="stat-content ">
+                                  <div class="stat-text">Today's Order</div>
+                                  <div class="stat-digit">{{order_count_in_day}}</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                      <div class="card">
+                          <div class="stat-widget-one card-body">
+                              <div class="stat-icon d-inline-block">
+                                  <i class="ti-user text-primary border-primary"></i>
+                              </div>
+                              <div class="stat-content ">
+                                  <div class="stat-text"> Total Customer</div>
+                                  <div class="stat-digit">{{number_of_users}}</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+           
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="stat-widget-one card-body">
+                                <div class="stat-icon d-inline-block">
+                                    <i class="ti-money text-success border-success"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-text">This Week's Sale</div>
+                                    <div class="stat-digit">{{order_count_in_week}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                      <div class="card">
+                          <div class="stat-widget-one card-body">
+                              <div class="stat-icon d-inline-block">
+                                  <i class="ti-money text-success border-success"></i>
+                              </div>
+                              <div class="stat-content">
+                                  <div class="stat-text">Total Month sale</div>
+                                  <div class="stat-digit">{{order_count_in_month}}</div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+
+ 
+
+      <!-- Sales Chart Start -->
+      <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-12 ">
+                <div class=" text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0" style="color:black;">Order Details</h6>
+                        <a href="{% url 'orders'%}">Show All</a>
+                    </div>
+                    <canvas id="orderChart"  class=""></canvas>
+                </div>
+            </div>
+   
+        <div class="col-lg-6">
+                <div class=" text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0" style="color:black;">Total Payment :</span> ₹{{revenue}}</h6>
+                        <a href="{% url 'orders'%}">Show All</a>
+                    </div>
+                    <canvas id="north-america-chart"  class="mx-auto">></canvas>
+                </div>
+            </div>
+     
+    
+   
+      <div class=" col-lg-6 ">
+          <div class="card">
+              <div class="card-body">
+                  <div class="year-calendar"></div>
+              </div>
+          </div>
+          <!-- /# card -->
+      </div>
+    </div>
+  </div>
+    <!-- Sales Chart End --> 
+
+  
+
+<script src="{% static 'js/adminjquery-3.3.1.min.js' %}"></script>
+<!-- https://jquery.com/download/ -->
+<script src="{% static 'js/moment.min.js' %}"></script>
+<!-- https://momentjs.com/ -->
+<script src="{% static 'js/Chart.min.js' %}"></script>
+<!-- http://www.chartjs.org/docs/latest/ -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+   <!-- Required vendors -->
+   <script src="{% static 'vendor/global/global.min.js' %}"></script>
+   <script src="{% static 'js/quixnav-init.js' %}"></script>
+   <script src="{% static 'js/custom.min.js' %}"></script>
+
+   <script src="{% static 'vendor/chartist/js/chartist.min.js' %}"></script>
+
+   <script src="{% static 'vendor/moment/moment.min.js' %}"></script>
+   <script src="{% static 'vendor/pg-calendar/js/pignose.calendar.min.js' %}"></script>
+
+
+   <script src="./js/dashboard/dashboard-2.js"></script>
+   <!-- Circle progress -->
+
+
+<script>
+  
+  var data = {
+      labels: ["Order Confirmed", "Shipped", "Out for delivery", "Delivered", "Cancelled", "Returned" ],
+      datasets: [{
+        label: ' of Orders',
+        data: ['{{ordered}}', '{{shipped}}', '{{out_of_delivery}}', '{{delivered}}', '{{cancelled}}', '{{returned}}'],
+        backgroundColor: [
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(54, 162, 235, 1)',
+          'rgba(255,99,132,1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1,
+        fill: true
+      }]
+      };
+    
+      var options = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      },
+      legend: {
+        display: false
+      },
+      elements: {
+        point: {
+          radius: 0
+        }
+      }
+  
+      };
+    
+    
+  
+  
+      // Get context with jQuery - using jQuery's .get() method.
+      if ($("#orderChart").length) {
+      var barChartCanvas = $("#orderChart").get(0).getContext("2d");
+      // This will get the first returned node in the jQuery collection.
+      var barChart = new Chart(barChartCanvas, {
+        type: 'bar',
+        data: data,
+        options: options
+      });
+      }
+  
+</script>
+
+<script>
+  if ($("#north-america-chart").length) {
+var areaData = {
+  labels: [ "RazorPay", "Cash on delivery"],
+  datasets: [{
+      data: ['{{razorpay_orders}}','{{cash_on_delivery_count}}'],
+      backgroundColor: [
+         "#4B49AC","#FFC100", "#248AFD",
+      ],
+      borderColor: "rgba(0,0,0,0)"
+    }
+  ]
+};
+var areaOptions = {
+  responsive: true,
+  maintainAspectRatio: true,
+  segmentShowStroke: false,
+  cutoutPercentage: 78,
+  elements: {
+    arc: {
+        borderWidth: 10
+    }
+  },      
+  legend: {
+    display: false
+  },
+  tooltips: {
+    enabled: true
+  },
+  legendCallback: function(chart) { 
+    var text = [];
+    text.push('<div class="report-chart">');
+      text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[1] + '"></div><p class="mb-0">RazorPay Sales</p></div>');
+      text.push('<p class="mb-0 mr-auto ml-4">{{razorpay_orders}}</p>');
+      text.push('</div>');
+      text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[2] + '"></div><p class="mb-0">Cash On Delivery</p></div>');
+      text.push('<p class="mb-0 mr-auto ml-3">{{cash_on_delivery_count}}</p>');
+      text.push('</div>');
+    text.push('</div>');
+    return text.join("");
+  },
+}
+var northAmericaChartPlugins = {
+  beforeDraw: function(chart) {
+    var width = chart.chart.width,
+        height = chart.chart.height,
+        ctx = chart.chart.ctx;
+
+    ctx.restore();
+    var fontSize = 3.125;
+    ctx.font = "500 " + fontSize + "em sans-serif";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#13381B";
+
+    var text = "{{total_payment_count}}",
+        textX = Math.round((width - ctx.measureText(text).width) / 2),
+        textY = height / 2;
+
+    ctx.fillText(text, textX, textY);
+    ctx.save();
+  }
+}
+var northAmericaChartCanvas = $("#north-america-chart").get(0).getContext("2d");
+var northAmericaChart = new Chart(northAmericaChartCanvas, {
+  type: 'doughnut',
+  data: areaData,
+  options: areaOptions,
+  plugins: northAmericaChartPlugins
+});
+document.getElementById('north-america-legend').innerHTML = northAmericaChart.generateLegend();
+}
+</script>
+
+<script>
+  var doughnutPieData = {
+datasets: [{
+  data: ['{{blocked_user}}', '{{unblocked_user}}'],
+  backgroundColor: [
+    'rgba(255, 99, 132, 0.5)',
+    'rgba(54, 162, 235, 0.5)',
+    'rgba(255, 206, 86, 0.5)',
+    'rgba(75, 192, 192, 0.5)',
+    'rgba(153, 102, 255, 0.5)',
+    'rgba(255, 159, 64, 0.5)'
+  ],
+  borderColor: [
+    'rgba(255,99,132,1)',
+    'rgba(54, 162, 235, 1)',
+    'rgba(255, 206, 86, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(255, 159, 64, 1)'
+  ],
+}],
+
+// These labels appear in the legend and in the tooltips when hovering different arcs
+labels: [
+  'Blocked Users',
+  'Unblocked Users',
+]
+};
+var doughnutPieOptions = {
+responsive: true,
+animation: {
+  animateScale: true,
+  animateRotate: true
+}
+};
+if ($("#doughnutChart").length) {
+var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
+var doughnutChart = new Chart(doughnutChartCanvas, {
+  type: 'doughnut',
+  data: doughnutPieData,
+  options: doughnutPieOptions
+});
+}
+</script>
+
+<script>
+  var data = {
+  labels: ["{{day_5_name}}", "{{day_4_name}}", "{{day_3_name}}", "{{day_2_name}}", "{{yesterday}}","{{today}}"],
+  datasets: [{
+    label: '# Sales',
+    data: ['{{day_5}}', '{{day_4}}', '{{day_3}}', '{{day_2}}', '{{yester_day_sale}}', '{{today_sale}}'],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(255, 206, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(255, 159, 64, 0.2)'
+    ],
+    borderColor: [
+      'rgba(255,99,132,1)',
+      'rgba(54, 162, 235, 1)',
+      'rgba(255, 206, 86, 1)',
+      'rgba(75, 192, 192, 1)',
+      'rgba(153, 102, 255, 1)',
+      'rgba(255, 159, 64, 1)'
+    ],
+    borderWidth: 1,
+    fill: false
+  }]
+};
+
+var options = {
+  scales: {
+    yAxes: [{
+      ticks: {
+        beginAtZero: true
+      }
+    }]
+  },
+  legend: {
+    display: false
+  },
+  elements: {
+    point: {
+      radius: 0
+    }
+  }
+
+};
+
+if ($("#lineChart").length) {
+  var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+  var lineChart = new Chart(lineChartCanvas, {
+    type: 'line',
+    data: data,
+    options: options
+  });
+}
+</script>
+
+{% endblock content %}

@@ -1,0 +1,152 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% extends 'mainapp/mainbase.html' %}
+
+{% load static %}
+
+{% block content %}
+ <!--================Home Banner Area =================-->
+ <section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div class="banner_content d-md-flex justify-content-between align-items-center">
+          <div class="mb-3 mb-md-0">
+            <h2>Shop Category</h2>
+            <p>Very us move be blessed multiply night</p>
+          </div>
+          <div class="page_link">
+            <a href="index.html">Home</a>
+            <a href="category.html">Shop</a>
+     
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Home Banner Area =================-->
+
+  <!--================Category Product Area =================-->
+ 
+  <section class="cat_product_area section_gap">
+    <div class="container">
+        <div class="row flex-row-reverse">
+          <form action="{% url 'search' %}" class="icons" method="GET">
+            <input class="ti-search" style=" width: 300px; height: 40px;" type="text" placeholder="Search here" name="keyword" id="keyword" required>
+        </form>
+        
+            <h2 class="genric-btn primary-border text-center mt-3">Find Your Fashion Here.</h2>
+        <div class="col-lg-9">
+          <div class="product_top_bar">
+            <div class="left_dorp">
+            </div>
+          </div>
+        
+          
+          <div class="latest_product_inner">
+          
+            <div class="row">
+                {% for product in products %}
+                <div class="col-lg-4 col-md-6">
+                   
+                        <div class="single-product">
+                            <div class="product-img">
+                                <img class="card-img" src="{{product.image_1.url}}" alt="">
+                                <div class="p_icon">
+                                    <a href="{{product.get_url}}">
+                                        <i class="ti-eye"></i>
+                                    </a>
+                                    <a href="{% url 'wishlist' %}">
+                                        <i class="ti-heart"></i>
+                                    </a>
+                                    <a href="{% url 'cart' %}">
+                                        <i class="ti-shopping-cart"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-btm">
+                                <a href="#" class="d-block">
+                                    <h4>{{product.product_name}}</h4>
+                                </a>
+                                <div class="mt-3">
+                                    <span class="mr-4">₹{{product.price}}</span>
+                                    
+                                </div>
+                            </div>         
+                        </div>
+                </div>
+                {% endfor %} 
+            </div>
+        </div>
+    </div>
+    
+        
+              <div class="col-lg-3">
+                <div class="left_sidebar_area">
+                  <aside class="left_widgets p_filter_widgets">
+                    <div class="l_w_title">
+                       
+                      <h3>Browse Categories</h3>
+                    </div>
+                    <div class="widgets_inner">
+                      <ul class="list">
+                        <li>
+                          <a href="{% url 'shop' %}">All Products</a>
+                        </li>
+                        {% for category in cat_links %}
+                        <li>
+                        <a class="text-dark f-5" data-toggle="collapse" href="#{{category.slug}}" role="button" aria-expanded="false" aria-controls="{{category.slug}}">
+                            {{category.category_name}}
+                        </a></li>
+
+                        <div class="collapse" id="{{category.slug}}">
+                            <div class="ml-3">
+                                {% for i in category.sub_category_set.all %}
+                        <li>
+                          <a href="{{i.get_url}}">{{i.sub_category_name}}</a>
+                          {% endfor %}
+                        </li>
+                    </div>
+                </div>
+                {% endfor %}
+                        </ul>
+                      </div>
+                  </aside>
+                </div>
+            </div>
+              
+            <div class="product__pagination">
+                {% if products.has_previous %}
+                  <a href="?page={{ products.previous_page_number }}"><i class="fa fa-long-arrow-left"></i></a>
+                {% endif %}
+                  <a href="?page={{ products.number }}">{{ products.number }}</a>
+                {% if products.has_next %}
+                  <a href="?page={{ products.next_page_number }}">{{ products.next_page_number }}</a>
+                {%endif%}
+
+                {% if products.has_next %}
+                  <a href="?page={{ products.next_page_number }}"><i class="fa fa-long-arrow-right"></i></a>
+                {%endif%}
+              </div>
+
+          </div>
+      </div>
+        </div>
+    </div>
+  </div>
+  
+          
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  
+    <script>
+      $( function() {
+      
+        $("#keyword").autocomplete({
+          source: "{% url 'get_product_names' %}"
+        });
+      } );
+      </script>
+
+  {% endblock content %}    

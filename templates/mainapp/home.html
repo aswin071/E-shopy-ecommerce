@@ -1,0 +1,208 @@
+{% extends 'mainapp/mainbase.html' %}
+{% load static %}
+{% block content %}
+<section class="home_banner_area mb-40">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div class="banner_content row">
+          <div class="col-lg-12">
+            <p class="sub text-uppercase">men Collection</p>
+            <h3><span>Show</span> Your <br />Personal <span>Style</span></h3>
+            <h4>Fowl saw dry which a above together place.</h4>
+            <a class="main_btn mt-40" href="{% url 'shop' %}">View Collection</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Home Banner Area =================-->
+  
+  <!-- Start feature Area -->
+  <section class="feature-area section_gap_bottom_custom">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="single-feature">
+            <a href="#" class="title">
+              <i class="flaticon-money"></i>
+              <h3>Money back gurantee</h3>
+            </a>
+            <p>Shall open divide a one</p>
+          </div>
+        </div>
+  
+        <div class="col-lg-3 col-md-6">
+          <div class="single-feature">
+            <a href="#" class="title">
+              <i class="flaticon-truck"></i>
+              <h3>Free Delivery</h3>
+            </a>
+            <p>Shall open divide a one</p>
+          </div>
+        </div>
+  
+        <div class="col-lg-3 col-md-6">
+          <div class="single-feature">
+            <a href="#" class="title">
+              <i class="flaticon-support"></i>
+              <h3>Alway support</h3>
+            </a>
+            <p>Shall open divide a one</p>
+          </div>
+        </div>
+  
+        <div class="col-lg-3 col-md-6">
+          <div class="single-feature">
+            <a href="#" class="title">
+              <i class="flaticon-blockchain"></i>
+              <h3>Secure payment</h3>
+            </a>
+            <p>Shall open divide a one</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End feature Area -->
+  
+  <!--================ Feature Product Area =================-->
+  <section class="feature_product_area section_gap_bottom_custom">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="main_title">
+            <h2><span>Featured product</span></h2>
+            <p>Bring called seed first of third give itself now ment</p>
+          </div>
+        </div>
+      </div>
+   
+   
+      <div class="row">
+        {% for product in featured_products  %}
+      
+        <div class="col-lg-4 col-md-4 col-sm-6">
+          <div class="product-size">
+          <div class="single-product">   
+            <div class="product-img">
+              <img class="img-fluid w-100 h-75 " src="{{product.image_1.url}}" alt="" class="prod-img"/>
+              <div class="p_icon">
+                <a href="{% url 'product_details' category_slug=product.category.slug sub_category_slug=product.sub_category.slug product_slug=product.slug %}">
+                  <i class="ti-eye"></i>
+                </a>
+                <a href="{% url 'wishlist' %}">
+                  <i class="ti-heart"></i>
+                </a>
+                <a href="{% url 'cart' %}">
+                  <i class="ti-shopping-cart"></i>
+                </a>
+              </div>
+            </div>
+           
+            <div class="product-btm">
+              <a href="" class="d-block">
+                <h4>{{product.product_name}}</h4>
+              </a>
+              <div class="mt-3">
+                <span class="mr-4">₹{{product.price}}</span>
+                <del>{{product.product_offer}} Offer</del>
+              </div>
+            </div>
+            
+          </div>
+        
+      </div>
+    </div>
+        {% endfor %}
+     
+      </div>
+    
+      
+     
+    </div>
+  </section>
+  <!--================ End Feature Product Area =================-->
+  
+  <!--================ Offer Area =================-->
+  <section class="offer_area">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="offset-lg-4 col-lg-6 text-center">
+          <div class="offer_content">
+            <h3 class="text-uppercase mb-40">all men’s collection</h3>
+            <h2 class="text-uppercase">50% off</h2>
+            <a href="{% url 'shop' %}" class="main_btn mb-20 mt-5">Discover Now</a>
+            <p>Limited Time Offer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================ End Offer Area =================-->
+    <!--================ New Product Area =================-->
+    <section class="new_product_area section_gap_top section_gap_bottom_custom">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-12">
+            <div class="main_title">
+              <h2><span>new products</span></h2>
+              <p>Bring called seed first of third give itself now ment</p>
+            </div>
+          </div>
+        </div>
+
+      
+        {% for product in latest_products_2 %}
+                                
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="new_product">
+            <h5 class="text-uppercase">collection of 2019</h5>
+            <h3 class="text-uppercase">Men’s summer shirt</h3>
+            <div class="product-img">
+              <img class="img-fluid" src="{{product.image_1.url}}" alt="" />
+            </div>
+            <h4>₹{{product.price}}</h4>
+            <a href="{% url 'shop' %}" class="main_btn">Shop Now</a>
+          </div>
+        </div>
+        {% endfor %}
+       
+        
+      <div class="col-lg-6 mt-5 mt-lg-0">
+        <div class="row">
+          {% for product in latest_products_1 %}
+          <div class="col-lg-6 col-md-6">
+            <div class="single-product">
+              <div class="product-img">
+                <img class="img-fluid w-100" src="{{product.image_1.url}}" alt="" />
+                <div class="p_icon">
+                  <a href="{{product.get_url}}">
+                    <i class="ti-eye"></i>
+                  </a>
+                  <a href="{% url  'add_wishlist' product.id %}">
+                    <i class="ti-heart"></i>
+                  </a>
+                  <a href="{% url 'cart' %}">
+                    <i class="ti-shopping-cart"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="product-btm">
+                <a href="#" class="d-block">
+                  <h4>{{product.product_name}}</h4>
+                </a>
+                <div class="mt-3">
+                  <span class="mr-4">₹{{product.price}}</span>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  
+  {% endblock content %}
+  

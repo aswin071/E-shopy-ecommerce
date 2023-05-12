@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png" />
+        <title>e-Shopy</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static '"css2/bootstrap.css' %}" />
+        <link rel="stylesheet" href="{% static 'vendors2/linericon/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'css2/font-awesome.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'css2/themify-icons.css' %}" />
+        <link rel="stylesheet" href="{% static 'css2/flaticon.css' %}" />
+        <link rel="stylesheet" href="{% static 'vendors2/owl-carousel/owl.carousel.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'vendors2/lightbox/simpleLightbox.css' %}" />
+        <link rel="stylesheet" href="{% static 'vendors2/nice-select/css/nice-select.css' %}" />
+        <link rel="stylesheet" href="{% static 'vendors2/animate-css/animate.css' %}" />
+        <link rel="stylesheet" href="{% static 'vendors2/jquery-ui/jquery-ui.css' %}" />
+        <!-- main css -->
+        <link rel="stylesheet" href="{% static 'css2/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'css2/responsive.css' %}" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        {% block extra_css %}{% endblock %}
+        {% block extra_js %}{% endblock %}
+    </head>
+    <body>
+
+          {% block content %}
+
+          {% endblock content %}
+        
+        <script src="" async defer></script>
+        <script src="{% static 'js2/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'js2/popper.js' %}"></script>
+  <script src="{% static 'js2/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js2/stellar.js' %}"></script>
+  <script src="{% static 'vendors2/lightbox/simpleLightbox.min.js' %}"></script>
+  <script src="{% static 'vendors2/nice-select/js/jquery.nice-select.min.js' %}"></script>
+  <script src="{% static 'vendors2/isotope/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendors2/isotope/isotope-min.js' %}"></script>
+  <script src="{% static 'vendors2/owl-carousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js2/jquery.ajaxchimp.min.js' %}"></script>
+  <script src="{% static 'vendors2/counter-up/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'vendors2/counter-up/jquery.counterup.js' %}"></script>
+  <script src="{% static 'js2/mail-script.js' %}"></script>
+  <script src="{% static 'js2/theme.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

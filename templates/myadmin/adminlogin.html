@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:400,700"/>
+ 
+  <!-- https://fonts.google.com/specimen/Open+Sans -->
+  <link rel="stylesheet" href="{% static 'adminlog/css1/fontawesome.min.css' %}" />
+  <!-- https://fontawesome.com/ -->
+  <link rel="stylesheet" href="{% static 'adminlog/css1/bootstrap.min.css' %}" />
+  <!-- https://getbootstrap.com/ -->
+  <link rel="stylesheet" href="{% static 'adminlog/css1/templatemo-style.css' %}">
+  </head>
+  <body>
+
+    <div class="container tm-mt-big tm-mb-big">
+      <div class="row">
+        <div class="col-12 mx-auto tm-login-col">
+          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <div class="row">
+              <div class="col-12 text-center">
+                <h2 class="tm-block-title mb-4">e-Shopy</h2>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-12">
+                {% for message in messages  %}
+                {{message}}
+              {% endfor %}
+                <form action='{% url 'adminlogin' %}' method="POST" class="tm-login-form">
+                  {% csrf_token %}
+ 
+                  <div class="form-group">
+                    <label for="email" class="form-label">email:</label>
+                    <input   class="form-control validate" type="text" id="email" name="email" required>
+                  </div>
+                  <div class="form-group mt-3">
+                    <label for="password">Password</label>
+                    <input  class="form-control validate" type="password" id="password" name="password" required>
+                  </div>
+                  <div class="form-group mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-block text-uppercase"
+                    >
+                      Login
+                    </button>
+                  </div>
+                  
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="" async defer></script>
+    <script src="{% static 'adminlog/js1/jquery-3.3.1.min.js' %}"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="{% static 'adminlog/js1/bootstrap.min.js' %}"></script>
+    <!-- https://getbootstrap.com/ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
