@@ -87,17 +87,20 @@
             <div class="product-img">
               <img class="img-fluid w-100 h-75 " src="{{product.image_1.url}}" alt="" class="prod-img"/>
               <div class="p_icon">
-                <a href="{% url 'product_details' category_slug=product.category.slug sub_category_slug=product.sub_category.slug product_slug=product.slug %}">
+                <a href="{{product.get_url}}">
                   <i class="ti-eye"></i>
                 </a>
-                <a href="{% url 'wishlist' %}">
+                {% comment %} <a href="{% url 'add_wishlist' product.id %}">
                   <i class="ti-heart"></i>
                 </a>
-                <a href="{% url 'cart' %}">
+             
+                <a href="{% url 'add_cart' product.id %}">
                   <i class="ti-shopping-cart"></i>
-                </a>
+                </a> {% endcomment %}
               </div>
             </div>
+            
+            
            
             <div class="product-btm">
               <a href="" class="d-block">
@@ -180,12 +183,12 @@
                   <a href="{{product.get_url}}">
                     <i class="ti-eye"></i>
                   </a>
-                  <a href="{% url  'add_wishlist' product.id %}">
+                  {% comment %} <a href="{% url  'add_wishlist' product.id %}">
                     <i class="ti-heart"></i>
                   </a>
                   <a href="{% url 'cart' %}">
                     <i class="ti-shopping-cart"></i>
-                  </a>
+                  </a> {% endcomment %}
                 </div>
               </div>
               <div class="product-btm">

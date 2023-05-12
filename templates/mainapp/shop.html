@@ -1,4 +1,4 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 {% extends 'mainapp/mainbase.html' %}
 
 {% load static %}
@@ -54,12 +54,12 @@
                                     <a href="{{product.get_url}}">
                                         <i class="ti-eye"></i>
                                     </a>
-                                    <a href="{% url 'wishlist' %}">
+                                    {% comment %} <a href="{% url 'wishlist' %}">
                                         <i class="ti-heart"></i>
                                     </a>
                                     <a href="{% url 'cart' %}">
                                         <i class="ti-shopping-cart"></i>
-                                    </a>
+                                    </a> {% endcomment %}
                                 </div>
                             </div>
                             <div class="product-btm">
@@ -139,6 +139,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   
     <script>
       $( function() {

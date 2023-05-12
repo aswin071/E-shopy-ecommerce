@@ -29,6 +29,9 @@ def home(request):
 
     return render(request,'mainapp/home.html',context)
 
+def contact(request):
+  return render(request,'mainapp/contact.html')
+
 
 
 def shop(request, category_slug=None, sub_category_slug=None):
