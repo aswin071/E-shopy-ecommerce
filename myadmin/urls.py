@@ -49,6 +49,12 @@ urlpatterns = [
     path('pdf_report/<str:start_date>//<str:end_date>/', views.pdf_report, name='pdf_report'), 
     path('excel_report/<str:start_date>//<str:end_date>/', views.excel_report, name='excel_report'),
 
+    path('banner/',views.banner,name='banner'),
+    path('add_banner/',views.add_banner,name='add_banner'),
+    path('select_banner/<int:id>',views.select_banner,name='select_banner'),
+    path('deselect_banner/<int:id>',views.deselect_banner,name='deselect_banner'),
+    path('remove_banner/<int:id>',views.remove_banner,name='remove_banner'),
+
    
      
 ]

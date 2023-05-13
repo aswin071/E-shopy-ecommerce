@@ -17,6 +17,8 @@ from django.db.models import Sum, Q, FloatField
 from django.http import HttpResponse
 from .forms import ProductForm,VariationForm, CouponForm
 
+from shop.models import Banner
+
 
 # Create your views here.
 
@@ -626,3 +628,47 @@ def excel_report(request, start_date, end_date):
     wb.save(response)
 
     return response
+
+@staff_member_required(login_url= 'adminlogin') 
+def banner(request):
+    bannr = Banner.objects.all()
+    return render(request,'myadmin/banner.html',{'bannr':bannr})
+
+@staff_member_required(login_url= 'adminlogin') 
+def add_banner(request):
+    if request.method == "POST":
+        banr=Banner()
+        if len(request.FILES) != 0:
+            print('IMAGE UPLOADED')
+            banr.banner_image = request.FILES.get('image')
+            banr.save()
+            return redirect('banner')
+    else:
+        
+        return render(request,'myadmin/add_banner.html')
+
+@staff_member_required(login_url= 'adminlogin') 
+def select_banner(request,id):
+    bannr = Banner.objects.all()
+    bannr.update(is_selected = False )
+    banners = Banner.objects.filter(id = id)
+    banners.update(is_selected = True)
+    return redirect('banner')
+
+
+
+def deselect_banner(request,id):
+    bannr = Banner.objects.all()
+    bannr.update(is_selected = True )
+    banners = Banner.objects.filter(id = id)
+    banners.update(is_selected = False)
+    return redirect('banner')
+
+
+
+
+@staff_member_required(login_url= 'adminlogin') 
+def remove_banner(request , id):
+    bannr = Banner.objects.filter(id= id)
+    bannr.delete()
+    return redirect(banner)

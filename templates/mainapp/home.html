@@ -1,19 +1,56 @@
 {% extends 'mainapp/mainbase.html' %}
 {% load static %}
 {% block content %}
-<section class="home_banner_area mb-40">
-    <div class="banner_inner d-flex align-items-center">
-      <div class="container">
-        <div class="banner_content row">
-          <div class="col-lg-12">
-            <p class="sub text-uppercase">men Collection</p>
-            <h3><span>Show</span> Your <br />Personal <span>Style</span></h3>
-            <h4>Fowl saw dry which a above together place.</h4>
-            <a class="main_btn mt-40" href="{% url 'shop' %}">View Collection</a>
+
+  {% comment %} <section class="home_banner_area mb-40">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div class="banner_content row">
+            <div class="col-lg-12">
+              <p class="sub text-uppercase">men Collection</p>
+              <h3><span>Show</span> Your <br />Personal <span>Style</span></h3>
+              <h4>Fowl saw dry which a above together place.</h4>
+              <a class="main_btn mt-40" href="{% url 'shop' %}">View Collection</a>
+            </div>
           </div>
         </div>
       </div>
+    </section> {% endcomment %}
+
+  <section class="home_banner_area mb-40">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div class="slick1" style="">
+  
+            {% for bnr in banner %}
+            {% if bnr.is_selected ==  True %}
+          
+            
+            <div class="home_banner_area" style="background-image:url({{ bnr.banner_image.url }})">
+                <img src="{{bnr.banner_image.url}}" alt="">
+                
+            {% else %}
+            
+                <div class="item-slick1" style="background-image:url({% static 'images/barca kit 3.jpeg' %})">
+                
+                {% endif %}
+            {% endfor %}
+            <div class="banner_inner d-flex align-items-center">
+              <div class="container">
+                <div class="banner_content row">
+                  <div class="col-lg-12">
+                    <p class="sub text-uppercase">men Collection</p>
+                    <h3><span>Show</span> Your <br />Personal <span>Style</span></h3>
+                    <h4>Fowl saw dry which a above together place.</h4>
+                    <a class="main_btn mt-40" href="{% url 'shop' %}">View Collection</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
+  </div>
+  </div>
   </section>
   <!--================End Home Banner Area =================-->
   

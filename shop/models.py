@@ -61,3 +61,9 @@ class Variation(models.Model):
   
   def __str__(self):
     return self.variation_value
+
+class Banner(models.Model):
+    
+    banner_image =models.ImageField( upload_to='photos/banner', height_field=None, width_field=None, max_length=None,blank=True)
+    
+    is_selected = models.BooleanField(default=False)

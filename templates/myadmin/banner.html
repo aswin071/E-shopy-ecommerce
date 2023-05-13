@@ -1,0 +1,84 @@
+
+{% extends 'myadmin/base.html' %}
+
+{% load static%}
+
+{% block title%}
+Add Banner
+{%endblock%}
+
+{% block navbar%}
+
+
+{%endblock%}
+
+
+{% block content%}
+
+<div class="content-body">
+    <div class="container mt-3" style="min-height: 33rem;">
+      <div class="text-center mx-auto mt-2"  style="min-width: 22rem;">{% include 'includes/alerts.html' %}</div>
+      <h2 class="text-center text-white">Banner</h2>
+<div class="row d-flex justify-content-end mx-5">
+    <a href="{% url 'add_banner' %}" class="btn btn-primary  mt-4 mb-3"><b>AddBanner </b> </a>
+    </div>
+    {% for img in bannr %}
+    
+    
+    <div class="container">
+    <div class="row justify-content-center" >
+        <div class="d-flex flex-row" style = "margin-bottom:15px; ">
+            <td class=" position-absolute">
+              <button type="button" class="btn btn-outline-primary me-3"  data-toggle="modal" data-target="#modal{{img.id}}">Delete</button>
+              {% if img.is_selected == False %}
+              <a href="{% url 'select_banner' img.id %}"><button class="btn btn-outline-success"style=""><b>Enable</b></button></a>
+               {% else %}
+              <a href="{% url 'deselect_banner' img.id %}"><button class="btn btn-outline-danger "style=""><b>Disable </b></button> <i class="fa fa-check" aria-hidden="true"></i>
+              </a>
+              
+              {% endif %}
+              
+            </td>
+
+            <div class="modal fade" id="modal{{img.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Banner</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    
+                    Do you really want to Delete Banner ?
+      
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <a href="{% url 'remove_banner' img.id %}"><button type="button" class="btn btn-primary">Yes</button></a>
+                  </div>
+                </div>
+              </div>
+            </div> 
+
+            
+    
+        </div>
+    <img src="{{ img.banner_image.url }}" style="margin-bottom:15px;"  >
+        
+   <hr>
+
+    {% endfor  %}
+    
+
+
+
+
+    
+    
+    
+
+    
+    
+    {% endblock %}
