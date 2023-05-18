@@ -13,11 +13,14 @@ from shop.models import Product,Variation
 from orders.models import Order,Coupon,Payment
 from datetime import datetime,timedelta,date
 from django.db.models import Sum, Q, FloatField
+from orders.models import Address
 
 from django.http import HttpResponse
 from .forms import ProductForm,VariationForm, CouponForm
 
 from shop.models import Banner
+
+
 
 
 # Create your views here.
@@ -672,3 +675,14 @@ def remove_banner(request , id):
     bannr = Banner.objects.filter(id= id)
     bannr.delete()
     return redirect(banner)
+
+def purchase_details(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    # address = Address.objects.filter(user=current_user)
+   
+    context = {
+        'order': order,
+       
+       
+    }
+    return render(request, 'myadmin/purchase_details.html', context)

@@ -375,7 +375,7 @@ def coupon(request):
     else:
           msg='This coupon is only applicable for orders more than ₹'+ str(instance.coupon.min_value)+ '\- only!'
     # except:
-          msg = 'Coupon is not valid'
+          msg = 'This coupon is only applicable for orders more than ₹'+ str(instance.coupon.min_value)+ '\- only!'
     response = {
                'grand_total': grand_total,
                'msg':msg,

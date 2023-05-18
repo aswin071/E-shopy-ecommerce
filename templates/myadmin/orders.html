@@ -1,47 +1,28 @@
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {% extends 'myadmin/base.html' %}
-
 {% load static %}
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>e-Shopy Admin </title>
-<!-- Favicon icon -->
-<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
-<!-- Custom Stylesheet -->
-<link href="{% static 'css1/style.css' %}" rel="stylesheet">
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required vendors -->
-    <script src="{% static 'vendor1/global1/global.min.js' %}"></script>
-    <script src="{% static 'js1/quixnav-init.js' %}"></script>
-    <script src="{% static 'js1/custom.min.js' %}"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZEQ6jW4W4UvXfmeW9Xj4E6" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js" integrity="sha384-0+k0lhLZQqxJYAbTh44KQx1+ClCzsJ/InyR38+aMMe+MjGqAP1EDhXZ5vx/R7CgJ" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZEQ6jW4W4UvXfmeW9Xj4E6" crossorigin="anonymous"></script>
-
-
 {% block content %}
 <div class="text-center mx-auto mt-2 w-50">{% include 'includes/alerts.html' %}</div>
-    <div class="content-body">
-        <div class="container-fluid">
-            <div class="row page-titles mx-0">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Orderlist</h4>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered verticle-middle table-responsive-sm">
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between">
+                    <input class="form-control w-50 mx-auto mb-3" type="search" placeholder="Search" aria-label="Search" id="myInput">
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Orderlist</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                          <table id="myTable" class="table table-bordered verticle-middle table-responsive-sm">
                         <thead>
                             <tr>
                                 <th scope="col">Number</th>
                                 <th>Name</th>
-                                <th>Email</th>
+                                {% comment %} <th>Email</th> {% endcomment %}
                                 <th>Amount</th>
                                 <th>Payment Mode</th>
                                 <th>Tracking id</th>
@@ -60,7 +41,7 @@
                                 <th scope="row">
                                   <a href="" class="text-white">{{forloop.counter}}</a></th>
                                 <td>{{order.full_name}}</td>
-                                <td>{{order.email}}</td>
+                                {% comment %} <td>{{order.email}}</td> {% endcomment %}
                                 <td>₹{{order.order_total}}</td>
                                 <td>{{order.payment.payment_method}}</td>
                                 <td>{{order.order_number}}</td>
@@ -86,6 +67,12 @@
                                   <b>Reason : </b><p>{{order.return_reason}}</p>
                                 {% endif %}
                               </td>
+                            
+<td>
+    <a href="{% url 'purchase_details' order.id %}" class="btn btn-primary btn-sm">Order Details</a>
+</td>
+...
+
                             </tr>
                             <!-- Status Modal -->
 <div class="modal fade" id="myModal{{order.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -225,18 +212,21 @@
     </ul>
   </nav>
 
-  
-               
-<script>
-    $(document).ready(function(){
-      $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#myTable tr").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+         
+
+
+  <script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
         });
-      });
     });
-  </script>
+</script>
+
+  
     
 
 {% endblock content %}

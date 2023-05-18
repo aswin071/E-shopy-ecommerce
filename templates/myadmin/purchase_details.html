@@ -1,0 +1,124 @@
+<!-- purchase_details.html -->
+{% extends 'myadmin/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<style>
+    .order-status-box {
+        width: 200px; /* Adjust the width as per your preference */
+    }
+</style>
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row page-titles mx-0">
+                <h3>Order Number #{{ order.order_number }}</h3>
+                <div class="order-status-box text-white bg-warning px-2 py-1 ml-auto">
+                    <p class="mb-0">Status: {{ order.status }}</p>
+                </div>
+            </div>     
+            <div class="row mt-3">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-blue">Order Details</h4>
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Item Summary</th>
+                                        <th>Quantity</th>
+                                        <th>Variation</th>
+                                        <th>Total Price</th>
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in order.user_order_page.all %}
+                                        <tr>
+                                            <td>{{ item.product.product_name }}</td>
+                                            <td>{{ item.quantity }}</td>
+                                            <td>
+                                                {% for variation in item.variations.all %}
+                                                    {{ variation.variation_value }}
+                                                {% endfor %}
+                                            </td>
+                                            <td>₹{{ item.product_price }}</td>
+                                            {% comment %} <td>₹{{ item.quantity|multiply:item.product_price|floatformat:2 }}</td> {% endcomment %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                             
+                            </table>
+
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-4 ">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="text-blue">Order Summary</h3>
+                            <p><strong>Order Date:</strong> {{order.created_at}}</p>
+                            <p><strong>Subtotal:</strong>    ₹{{order.order_total}}</p>
+                            <p><strong>Tax :</strong> {{order.tax}} </p>
+                            <p><strong>Discount Allowed:</strong> -({{order.order_discount}})</p>
+                            <p><strong>Total Amount:</strong> ₹{{ order.order_total }}</p>
+                            
+                          
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 ">
+                    <div class="card mt-5">
+                        <div class="card-body">
+                            <h4 class="text-blue">Customer Details</h4>
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                       
+                                        <th>Full Name</th>
+                                        <th>Email</th>
+                                        <th>Amount</th>
+                                        <th>Payment Method</th>
+                                        <th>Tracking ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                       
+                                        <td>{{ order.full_name }}</td>
+                                        <td>{{ order.email }}</td>
+                                        <td>₹{{ order.order_total }}</td>
+                                        <td>{{ order.payment.payment_method }}</td>
+                                        <td>{{ order.order_number }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 ">
+                    <div class="card mt-5">
+                        <div class="card-body">
+                            <h3 class="text-blue">Delivery Address</h3>
+                            <p><strong>Phone Number:</strong> {{ order.phone }}</p>
+                            <p><strong>Address line 1:</strong> {{ order.address_line1 }}</p>
+                            <p><strong>Address line 2:</strong> {{ order.address_line2 }}</p>
+                            <p><strong>City:</strong> {{ order.city }}</p>
+                            <p><strong>Pincode:</strong> {{ order.pincode }}</p>
+                          
+
+                        </div>
+                    </div>
+                </div>
+                
+           
+        </div>
+    </div>
+     
+  
+
+{% endblock content %}

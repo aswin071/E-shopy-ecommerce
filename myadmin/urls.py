@@ -55,6 +55,8 @@ urlpatterns = [
     path('deselect_banner/<int:id>',views.deselect_banner,name='deselect_banner'),
     path('remove_banner/<int:id>',views.remove_banner,name='remove_banner'),
 
+    path('purchase_details/<int:order_id>/', views.purchase_details, name='purchase_details'),
+
    
      
 ]

@@ -12,7 +12,7 @@
         <link href= "{% static 'admin/vendor/pg-calendar/css/pignose.calendar.min.css' %}" rel="stylesheet">
         <link href= "{% static 'admin/vendor/chartist/css/chartist.min.css' %}" rel="stylesheet">
         <link href= "{% static 'admin/css/style.css' %}" rel="stylesheet">
-        <link rel="icon" type="image/x-icon" href="{% static 'img/logo.png' %}">
+        <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.png.png' %}">
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -186,81 +186,17 @@
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Main Menu</li>
-                    <li><a href="{% url 'adminhome' %}"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                        
-                    </li>
-                    {% comment %} <li><a class="has-arrow" href="{% url 'adminhome' %}" aria-expanded="false"><i
-                                class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                                
-                           
-                        <ul aria-expanded="false">
-                           
-                        </ul>
-                    </li> {% endcomment %}
-
-                    {% comment %} <li class="nav-label">Apps</li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                class="icon icon-app-store"></i><span class="nav-text">Apps</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href= "app-profile.html">Profile</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                                <ul aria-expanded="false">
-                                    <li><a href= "email-compose.html">Compose</a></li>
-                                    <li><a href= "email-inbox.html">Inbox</a></li>
-                                    <li><a href= "email-read.html">Read</a></li>
-                                </ul>
-                            </li>
-                            <li><a href= "app-calender.html">Calendar</a></li>
-                        </ul>
-                    </li> {% endcomment %}
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><span class="nav-text">Sales Report</span></a>
-                 <ul aria-expanded="false">
-                     <li><a href="{% url 'sales_report' %}">view Report</a></li>
-                    
-                 </ul>
-             </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><span class="nav-text">Account</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="{% url 'userview' %}">Userlist</a></li>
-                           
-                        </ul>
-                    </li>
-          
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><span class="nav-text">Categories</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="{% url 'categories' %}">Product Category</a></li>
-                            {% comment %} <li><a href="{% url 'subcategory' %}">SubCatgeory</a></li> {% endcomment %}
-                          
-
-                        </ul>
-                    </li>
-
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><span class="nav-text">Products</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="{% url 'products' %}">ProductList</a></li>
-                        </ul>
-
-                        <ul aria-expanded="false">
-                            <li><a href="{% url 'orders' %}">Orders</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><span class="nav-text">Coupons</span></a>
-                <ul aria-expanded="false">
-                    <li><a href="{% url 'coupons' %}">Coupons List</a></li>
-                </ul>
-             
-            </li>
-            {% comment %} <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><span class="nav-text">Banner</span></a>
-                <ul aria-expanded="false">
-                    <li><a href="{% url 'banner' %}">Banner</a></li>
-                </ul>
-             
-            </li> {% endcomment %}
-                   
+                    <li><a href="{% url 'adminhome' %}"><i class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a> </li>
+                    <li><a  href="{% url 'sales_report' %}" aria-expanded="false"><span class="nav-text">Sales Report</span></a></li>
+                    <li><a  href="{% url 'userview' %}" aria-expanded="false"><span class="nav-text">Account</span></a></li>
+                    <li><a href="{% url 'categories' %}" aria-expanded="false"><span class="nav-text">Categories</span></a></li>
+                    <li><a href="{% url 'products' %}" aria-expanded="false"><span class="nav-text">Products</span></a></li>
+                    <li><a href="{% url 'orders' %}" aria-expanded="false"><span class="nav-text">Orders</span></a></li>
+                    <li><a  href="{% url 'coupons' %}" aria-expanded="false"><span class="nav-text">Coupons</span></a></li>   
                 </ul>
             </div>
         </div>
-        <!--**********************************
+               <!--**********************************
             Sidebar end
         ***********************************-->
           <!--**********************************
@@ -269,31 +205,48 @@
      
                 <!-- row -->
 
-           {% block content %}
+                {% block content %}
            
-           {% endblock content %}
+                {% endblock content %}
+     
+     
+           
+         </div>
+          <!--**********************************
+             Scripts
+         ***********************************-->
+         <!-- Required vendors -->
+         <script src= "{% static 'admin/vendor/global/global.min.js' %}"></script>
+         <script src= "{% static 'admin/js/quixnav-init.js' %}"></script>
+         <script src= "{% static 'admin/js/custom.min.js' %}"></script>
+     
+         <script src= "{% static 'admin/vendor/chartist/js/chartist.min.js' %}"></script>
+     
+         <script src= "{% static 'admin/vendor/moment1/moment.min.js' %}"></script>
+         <script src= "{% static 'admin/vendor/pg-calendar/js/pignose.calendar.min.js' %}"></script>
+     
+     
+         <script src= "{% static 'admin/js/dashboard/dashboard-2.js' %}"></script>
+         <!-- Circle progress -->
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+             <script src="" async defer></script>
+         </body>
+     </html>
+                        
+                   
+                  
+                  
+                 
+             
+                    
+                        
+                  
+          
+                   
+                       
 
+                   
+            
 
-      
-    </div>
-     <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required vendors -->
-    <script src= "{% static 'admin/vendor/global/global.min.js' %}"></script>
-    <script src= "{% static 'admin/js/quixnav-init.js' %}"></script>
-    <script src= "{% static 'admin/js/custom.min.js' %}"></script>
-
-    <script src= "{% static 'admin/vendor/chartist/js/chartist.min.js' %}"></script>
-
-    <script src= "{% static 'admin/vendor/moment1/moment.min.js' %}"></script>
-    <script src= "{% static 'admin/vendor/pg-calendar/js/pignose.calendar.min.js' %}"></script>
-
-
-    <script src= "{% static 'admin/js/dashboard/dashboard-2.js' %}"></script>
-    <!-- Circle progress -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="" async defer></script>
-    </body>
-</html>
+ 
